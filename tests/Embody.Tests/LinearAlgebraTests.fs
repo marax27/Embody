@@ -1,6 +1,7 @@
 ﻿namespace Tests.LinearAlgebra
 
 open Xunit
+open FsUnit.Xunit
 open Embody.LinearAlgebra
 
 module ``When creating a vector3`` =
@@ -12,27 +13,27 @@ module ``When creating a vector3`` =
     
         let sut = vector3 1.2345 9.0 0.999
 
-        Assert.Equal(1.2345, sut.x)
-        Assert.Equal(9.0, sut.y)
-        Assert.Equal(0.999, sut.z)
+        sut.x |> should equal 1.2345
+        sut.y |> should equal 9.0
+        sut.z |> should equal 0.999
 
     [<Fact>]
     let ``Given typed values, Then vector3 preserves types`` () =
         
         let sut = vector3 5.0<U> 10.0<U> 2.0<U>
 
-        Assert.Equal(5.0<U>, sut.x)
-        Assert.Equal(10.0<U>, sut.y)
-        Assert.Equal(2.0<U>, sut.z)
+        sut.x |> should equal 5.0<U>
+        sut.y |> should equal 10.0<U>
+        sut.z |> should equal 2.0<U>
 
     [<Fact>]
     let ``Given typed values, Then vector3 contains expected values`` () =
         
         let sut = vector3 5.0<U> 10.0<U> 2.0<U>
 
-        Assert.Equal(5.0, float sut.x)
-        Assert.Equal(10.0, float sut.y)
-        Assert.Equal(2.0, float sut.z)
+        float sut.x |> should equal 5.0
+        float sut.y |> should equal 10.0
+        float sut.z |> should equal 2.0
 
 
 module ``When calculating vector3's properties`` =
@@ -47,7 +48,7 @@ module ``When calculating vector3's properties`` =
 
         let actual = sut |> Vector3.squaredLength 
 
-        Assert.Equal(actual, expected)
+        expected |> should equal actual
 
     [<Fact>]
     let ``Given sample vector, Then it has expected length`` () =
@@ -57,7 +58,7 @@ module ``When calculating vector3's properties`` =
 
         let actual = sut |> Vector3.length
 
-        Assert.Equal(actual, expected)
+        expected |> should equal actual
 
 
 module ``When performing binary vector3 operations`` =
@@ -69,23 +70,23 @@ module ``When performing binary vector3 operations`` =
     let ``Given 2 vectors (Sample, Other), Then `Sample + Other` returns expected vector`` () =
         let expected = vector3 -10.0 -2.0 3.0
         let actual = SampleVector + OtherVector
-        Assert.Equal(expected, actual)
+        expected |> should equal actual
 
     [<Fact>]
     let ``Given 2 vectors (Sample, Other), Then `Other + Sample` returns expected vector`` () =
         let expected = vector3 -10.0 -2.0 3.0
         let actual = OtherVector + SampleVector
-        Assert.Equal(expected, actual)
+        expected |> should equal actual
 
     [<Fact>]
     let ``Given 2 vectors (Sample, Other), Then `Sample - Other` returns expected vector`` () =
         let expected = vector3 20.0 0.0 1.0
         let actual = SampleVector - OtherVector
-        Assert.Equal(expected, actual)
+        expected |> should equal actual
 
     [<Fact>]
     let ``Given 2 vectors (Sample, Other), Then `Other - Sample` returns expected vector`` () =
         let expected = vector3 -20.0 0.0 -1.0
         let actual = OtherVector - SampleVector
-        Assert.Equal(expected, actual)
+        expected |> should equal actual
 
