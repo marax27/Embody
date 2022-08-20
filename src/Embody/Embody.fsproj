@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="LinearAlgebra.fs" />
+	  <Compile Include="LinearAlgebra.fs" />
+	  <Compile Include="Domain.fs" />
+	  <Compile Include="Integration.fs" />
   </ItemGroup>
 
 </Project>
