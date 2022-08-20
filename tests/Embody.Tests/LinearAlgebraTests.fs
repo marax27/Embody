@@ -1,14 +1,151 @@
-module Tests.LinearAlgebra
+﻿namespace Tests.LinearAlgebra
 
-open System
 open Xunit
+open FsUnit.Xunit
 open Embody.LinearAlgebra
 
-[<Fact>]
-let ``My test`` () =
-    let given = "Name."
-    let expected = "Hello Name."
+module ``When creating a vector3`` =
+    
+    [<Measure>] type U
 
-    let actual = hello given
+    [<Fact>]
+    let ``Given sample values, Then vector3 contains expected values`` () =
+    
+        let sut = vector3 1.2345 9.0 0.999
 
-    Assert.Equal(expected, actual)
+        sut.x |> should equal 1.2345
+        sut.y |> should equal 9.0
+        sut.z |> should equal 0.999
+
+    [<Fact>]
+    let ``Given typed values, Then vector3 preserves types`` () =
+        
+        let sut = vector3 5.0<U> 10.0<U> 2.0<U>
+
+        sut.x |> should equal 5.0<U>
+        sut.y |> should equal 10.0<U>
+        sut.z |> should equal 2.0<U>
+
+    [<Fact>]
+    let ``Given typed values, Then vector3 contains expected values`` () =
+        
+        let sut = vector3 5.0<U> 10.0<U> 2.0<U>
+
+        float sut.x |> should equal 5.0
+        float sut.y |> should equal 10.0
+        float sut.z |> should equal 2.0
+
+
+module ``When calculating vector3's properties`` =
+    
+    [<Measure>] type U
+
+    [<Fact>]
+    let ``Given sample vector, Then it has expected squared length`` () =
+        
+        let expected = 121.0
+        let sut = vector3 2.0 6.0 9.0
+
+        let actual = sut |> Vector3.squaredLength 
+
+        expected |> should equal actual
+
+    [<Fact>]
+    let ``Given sample vector, Then it has expected length`` () =
+        
+        let expected = 11.0<U>
+        let sut = vector3 2.0<U> 6.0<U> 9.0<U>
+
+        let actual = sut |> Vector3.length
+
+        expected |> should equal actual
+
+
+module ``When performing binary vector3 operations`` =
+
+    let SampleVector = vector3 5.0 -1.0 2.0
+    let OtherVector = vector3 -15.0 -1.0 1.0
+
+    [<Fact>]
+    let ``Given 2 vectors (Sample, Other), Then `Sample + Other` returns expected vector`` () =
+        let expected = vector3 -10.0 -2.0 3.0
+        let actual = SampleVector + OtherVector
+        expected |> should equal actual
+
+    [<Fact>]
+    let ``Given 2 vectors (Sample, Other), Then `Other + Sample` returns expected vector`` () =
+        let expected = vector3 -10.0 -2.0 3.0
+        let actual = OtherVector + SampleVector
+        expected |> should equal actual
+
+    [<Fact>]
+    let ``Given 2 vectors (Sample, Other), Then `Sample - Other` returns expected vector`` () =
+        let expected = vector3 20.0 0.0 1.0
+        let actual = SampleVector - OtherVector
+        expected |> should equal actual
+
+    [<Fact>]
+    let ``Given 2 vectors (Sample, Other), Then `Other - Sample` returns expected vector`` () =
+        let expected = vector3 -20.0 0.0 -1.0
+        let actual = OtherVector - SampleVector
+        expected |> should equal actual
+
+
+module ``When multiplying a vector by a scalar`` =
+
+    let SampleVector = vector3 2.0 -4.0 7.0
+
+    [<Fact>]
+    let ``Given positive scalar, Then `Vector * Scalar` returns expected vector`` () =
+        let expected = vector3 6.0 -12.0 21.0
+        let actual = SampleVector * 3.0
+        expected |> should equal actual
+
+    [<Fact>]
+    let ``Given positive scalar, Then `Scalar * Vector` returns expected vector`` () =
+        let expected = vector3 6.0 -12.0 21.0
+        let actual = 3.0 * SampleVector
+        expected |> should equal actual
+
+    [<Fact>]
+    let ``Given negative scalar, Then `Vector * Scalar` returns expected vector`` () =
+        let expected = vector3 -4.0 8.0 -14.0
+        let actual = SampleVector * (-2.0)
+        expected |> should equal actual
+
+    [<Fact>]
+    let ``Given negative scalar, Then `Scalar * Vector` returns expected vector`` () =
+        let expected = vector3 -4.0 8.0 -14.0
+        let actual = -2.0 * SampleVector
+        expected |> should equal actual
+
+
+module ``When dividing a vector by a scalar`` =
+    
+    let SampleVector = vector3 2.0 -4.0 1.0
+
+    [<Fact>]
+    let ``Given positive scalar, Then `Vector / Scalar` returns expected vector`` () =
+        let expected = vector3 1.0 -2.0 0.5
+        let actual = SampleVector / 2.0
+        expected |> should equal actual
+
+    [<Fact>]
+    let ``Given negative scalar, Then `Vector / Scalar` returns expected vector`` () =
+        let expected = vector3 -1.0 2.0 -0.5
+        let actual = SampleVector / -2.0
+        expected |> should equal actual
+
+
+module ``When performing unary vector3 operations`` =
+
+    let SampleVector = vector3 5.0 -1.0 0.0
+
+    [<Fact>]
+    let ``Given a sample vector, `-Vector` returns expected vector`` () =
+        let expected = vector3 -5.0 1.0 0.0
+        -SampleVector |> should equal expected
+
+    [<Fact>]
+    let ``Given a sample vector, `+Vector` returns expected vector`` () =
+        +SampleVector |> should equal SampleVector
