@@ -22,6 +22,29 @@ module LinearAlgebra =
             z = v.z - u.z
         }
 
+        static member (*) (v: NumericalVector3<'v>, scalar: float<'s>) = {
+            x = v.x * scalar
+            y = v.y * scalar
+            z = v.z * scalar
+        }
+
+        static member (*) (scalar: float<'s>, v: NumericalVector3<'v>) =
+            v * scalar
+
+        static member (/) (v: NumericalVector3<'v>, scalar: float<'s>) = {
+            x = v.x / scalar
+            y = v.y / scalar
+            z = v.z / scalar
+        }
+
+        static member (~-) v = {
+            x = -v.x
+            y = -v.y
+            z = -v.z
+        }
+
+        static member (~+) v = v
+
     /// Construct an actual 3D vector.
     let inline vector3 x y z = { x = x; y = y; z = z }
 
