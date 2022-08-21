@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -10,6 +10,7 @@
 	  <Compile Include="Domain.fs" />
 	  <Compile Include="Integration.fs" />
 	  <Compile Include="Integrators.fs" />
+	  <Compile Include="Accelerators.fs" />
 	  <Compile Include="Simulation.Base.fs" />
 	  <Compile Include="Simulation.Execution.fs" />
 	  <Compile Include="Simulation.Transforms.fs" />

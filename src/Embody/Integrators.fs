@@ -15,13 +15,18 @@ module Integrators =
             (X: NumericalVector3<'state> array)
             (X': NumericalVector3<'state/'t> array)
             (Δt: float<'t>)
+            : NumericalVector3<'state> array
             =
             Array.zip X X'
             |> Array.map (fun (x, x') -> x + x' * Δt)
 
 
         /// Calculate bodies' gravitational parameters.
-        let calculateGravitationalParameters system settings =
+        let inline calculateGravitationalParameters
+            (system: CelestialSystem<'l, 't, 'm>)
+            (settings: IntegratorSettings<'l, 't, 'm>)
+            : float<'l^3/'t^2> array
+            =
             let G = settings.GravitationalConstant
             system.Bodies |> Array.map (fun body -> G * body.Mass)
 
@@ -33,7 +38,6 @@ module Integrators =
             calculateNextStep
             : IntegratorStep<'l, 't> array
             =
-            let G = settings.GravitationalConstant
             let stepCount = int ((settings.TEnd - settings.TStart) / settings.DeltaT)
         
             let initialStep = {
