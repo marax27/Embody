@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
@@ -15,7 +15,13 @@
 	  <Compile Include="Simulation.Execution.fs" />
 	  <Compile Include="Simulation.Transforms.fs" />
 	  <Compile Include="Metrics.fs" />
+	  <Compile Include="Visualisations\Definitions.fs" />
+	  <Compile Include="Visualisations\Layout2D.fs" />
+	  <Compile Include="Visualisations\Plots2D.fs" />
+	  <Compile Include="Visualisations\Plots3D.fs" />
   </ItemGroup>
+
+  <ItemGroup />
 
   <ItemGroup>
     <PackageReference Include="XPlot.Plotly" Version="4.0.6" />
