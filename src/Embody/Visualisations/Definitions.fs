@@ -1,5 +1,6 @@
 ﻿namespace Embody.Visualisations
 
+open Embody
 
 // Common definitions.
 
@@ -29,4 +30,14 @@ type Plot2D<[<Measure>] 'x, [<Measure>] 'y> = {
 
 // 3D plot-specific definitions.
 
-// TODO.
+type Single3DTrajectory<[<Measure>] 'l, [<Measure>] 't> = {
+    Name: string
+    T: float<'t> array
+    R: LinearAlgebra.NumericalVector3<'l> array
+}
+
+
+type Plot3D<[<Measure>] 'l, [<Measure>] 't> = {
+    Title: string
+    Trajectories: Single3DTrajectory<'l, 't> seq
+}
