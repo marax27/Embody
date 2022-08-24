@@ -1,10 +1,10 @@
 ﻿namespace Embody.Simulation
 
-open Embody.Domain
 
+/// Contains transformations that can be applied to a simulation result.
 module Transforms =
-    
-    open Base
+
+    open Embody.Domain
 
     module private Helpers =
 

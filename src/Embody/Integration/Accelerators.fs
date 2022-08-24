@@ -1,8 +1,8 @@
-﻿namespace Embody
+﻿namespace Embody.Integration
 
 module Accelerators =
 
-    open LinearAlgebra
+    open Embody.LinearAlgebra
 
     let private power (squaredLength: float<'l^2>): float<'l^-3> =
         let result = (float squaredLength) ** -1.5

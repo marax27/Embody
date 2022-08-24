@@ -2,8 +2,6 @@
 
 module Execution =
 
-    open Base
-
     /// Execute a single simulation.
     let simulate preset =
         let steps = preset.Integrator preset.System preset.Settings
@@ -11,6 +9,7 @@ module Execution =
             Preset = preset
             Steps = steps
         }
+
 
     /// Execute a single simulation, asynchronously.
     let simulateAsync preset = async {
@@ -21,8 +20,10 @@ module Execution =
         }
     }
 
+
     /// Execute multiple simulations in parallel, and return results once all simulations have finished.
-    /// Limitations: all presets need to be using identical units of measure.
+    ///
+    /// Limitations: all presets must use identical units of measure.
     let simulateInParallel presets =
         presets
         |> Seq.map simulateAsync

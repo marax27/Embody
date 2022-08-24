@@ -1,10 +1,9 @@
-﻿namespace Embody
+﻿namespace Embody.Simulation
 
 module Metrics =
 
-    open Integration
-    open LinearAlgebra
-    open Simulation.Base
+    open Embody.Integration
+    open Embody.LinearAlgebra
 
     /// Calculate total energy (TE) of an n-body system.
     /// TE is the sum of kinetic energy (KE) and potential energy (PE).

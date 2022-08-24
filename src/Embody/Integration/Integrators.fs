@@ -1,11 +1,10 @@
-﻿namespace Embody
+﻿namespace Embody.Integration
 
 /// Contains implementations of the integrators (aka numerical integration methods).
 module Integrators =
 
-    open Domain
-    open Integration
-    open LinearAlgebra
+    open Embody.Domain
+    open Embody.LinearAlgebra
 
     module private IntegratorHelpers =
         
@@ -35,7 +34,7 @@ module Integrators =
         let inline baseIntegrate<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm>
             (system: CelestialSystem<'l, 't, 'm>)
             (settings: IntegratorSettings<'l, 't, 'm>)
-            calculateNextStep
+            (calculateNextStep: int -> IntegratorStep<'l, 't> -> IntegratorStep<'l, 't>)
             : IntegratorStep<'l, 't> array
             =
             let stepCount = int ((settings.TEnd - settings.TStart) / settings.DeltaT)
@@ -75,7 +74,7 @@ module Integrators =
         let Δt = settings.DeltaT
         let μs = calculateGravitationalParameters system settings
 
-        let inline calculateNextStep index step =
+        let inline calculateNextStep (index: int) (step: IntegratorStep<'l, 't>) =
             let A = settings.Accelerator step.R μs
             {
                 T = settings.TStart + Δt * (float index + 1.0)
@@ -95,7 +94,7 @@ module Integrators =
         let Δt1_2 = 0.5 * Δt
         let μs = calculateGravitationalParameters system settings
 
-        let inline calculateNextStep index step =
+        let inline calculateNextStep (index: int) (step: IntegratorStep<'l, 't>) =
             let A = settings.Accelerator step.R μs
             let R_mid = advanceState step.R step.V Δt1_2
             let V_mid = advanceState step.V A Δt1_2
@@ -125,7 +124,7 @@ module Integrators =
             k1s
             |> Array.mapi (fun i k1 -> (k1 + 2.0 * k2s.[i] + 2.0 * k3s.[i] + k4s.[i]) / 6.0)
 
-        let inline calculateNextStep index step =
+        let inline calculateNextStep (index: int) (step: IntegratorStep<'l, 't>) =
             let k1V = step.V
             let k1A = accelerate step.R
 
@@ -163,7 +162,7 @@ module Integrators =
         let initialPositions = system.Bodies |> Array.map (fun body -> body.R)
         let mutable Atmp = settings.Accelerator initialPositions μs
 
-        let calculateNextStep index step =
+        let calculateNextStep (index: int) (step: IntegratorStep<'l, 't>) =
             let V1 = advanceState step.V Atmp Δt1_2
             let R1 = advanceState step.R V1 Δt
             let A1 = settings.Accelerator R1 μs
@@ -192,7 +191,7 @@ module Integrators =
         let initialPositions = system.Bodies |> Array.map (fun body -> body.R)
         let mutable A = settings.Accelerator initialPositions μs
 
-        let calculateNextStep index step =
+        let calculateNextStep (index: int) (step: IntegratorStep<'l, 't>) =
             let V_mid = advanceState step.V A Δt1_2
             let R1 = advanceState step.R V_mid Δt
             A <- settings.Accelerator R1 μs
