@@ -8,6 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="TestUtilities.fs" />
+    <Compile Include="Simulation\TransformsTests.fs" />
     <Compile Include="LinearAlgebra\VectorFunctionsTests.fs" />
     <Compile Include="LinearAlgebra\VectorCreationTests.fs" />
     <Compile Include="LinearAlgebra\VectorOperatorsTests.fs" />

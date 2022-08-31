@@ -60,3 +60,22 @@ module Transforms =
 
         simulationResult.Steps
         |> Array.map (fun step -> predicate step.R.[firstBodyIndex] step.R.[secondBodyIndex])
+
+
+    /// Apply a predicate to position and velocity of a body, **relative to** central body.
+    let forPositionAndVelocityRelativeTo
+        (orbitingBodyName: string)
+        (centralBodyName: string)
+        (predicate)
+        (simulationResult: SimulationResult<'l, 't, 'm>)
+        =
+        let bodies = simulationResult.Preset.System.Bodies
+        let orbitingBodyIndex = bodies |> findBodyIndex orbitingBodyName
+        let centralBodyIndex = bodies |> findBodyIndex centralBodyName
+
+        simulationResult.Steps
+        |> Array.map (fun step ->
+                let R = step.R.[orbitingBodyIndex] - step.R.[centralBodyIndex]
+                let V = step.V.[orbitingBodyIndex] - step.V.[centralBodyIndex]
+                predicate R V
+            )
