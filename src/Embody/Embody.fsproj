@@ -11,6 +11,7 @@
     <Authors>Kacper Tonia</Authors>
     <Product>Embody</Product>
     <PackageTags>simulation;n-body;fsharp;F#;physics</PackageTags>
+    <RepositoryUrl>https://github.com/marax27/Embody</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
