@@ -84,6 +84,7 @@ module Integrators =
 
         calculateNextStep |> baseIntegrate system settings
 
+
     /// Midpoint integration method.
     let integrateMidpoint<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm>
         (system: CelestialSystem<'l, 't, 'm>)
@@ -204,13 +205,3 @@ module Integrators =
             }
 
         calculateNextStep |> baseIntegrate system settings
-
-
-    let private getImplementedIntegrators () : Integrator<'l, 't, 'm> seq = seq {
-        yield integrateForwardEuler
-        yield integrateMidpoint
-        yield integrateRK4
-        yield integrateVelocityVerlet
-        yield integrateLeapfrog
-    }
-

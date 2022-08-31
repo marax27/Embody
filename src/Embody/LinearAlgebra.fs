@@ -10,40 +10,40 @@ module LinearAlgebra =
             z: float<'u>
         }
 
-        static member (+) (v, u) = {
+        static member inline (+) (v, u) = {
             x = v.x + u.x
             y= v.y + u.y
             z = v.z + u.z
         }
 
-        static member (-) (v, u) = {
+        static member inline (-) (v, u) = {
             x = v.x - u.x
             y = v.y - u.y
             z = v.z - u.z
         }
 
-        static member (*) (v: NumericalVector3<'v>, scalar: float<'s>) = {
+        static member inline (*) (v: NumericalVector3<'v>, scalar: float<'s>) = {
             x = v.x * scalar
             y = v.y * scalar
             z = v.z * scalar
         }
 
-        static member (*) (scalar: float<'s>, v: NumericalVector3<'v>) =
+        static member inline (*) (scalar: float<'s>, v: NumericalVector3<'v>) =
             v * scalar
 
-        static member (/) (v: NumericalVector3<'v>, scalar: float<'s>) = {
+        static member inline (/) (v: NumericalVector3<'v>, scalar: float<'s>) = {
             x = v.x / scalar
             y = v.y / scalar
             z = v.z / scalar
         }
 
-        static member (~-) v = {
+        static member inline (~-) v = {
             x = -v.x
             y = -v.y
             z = -v.z
         }
 
-        static member (~+) v = v
+        static member inline (~+) v = v
 
     /// Construct an actual 3D vector.
     let inline vector3 x y z = { x = x; y = y; z = z }
@@ -52,7 +52,7 @@ module LinearAlgebra =
     module Vector3 =
 
         /// Compute squared length (squared magnitude) of a vector.
-        let inline squaredLength vector =
+        let inline squaredLength (vector: NumericalVector3<'u>): float<'u^2> =
             vector.x * vector.x + vector.y * vector.y + vector.z * vector.z
 
         let inline length (vector: NumericalVector3<'u>): float<'u> =

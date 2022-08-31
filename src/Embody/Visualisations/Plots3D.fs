@@ -23,6 +23,7 @@ module Plots3D =
         )
 
 
+    /// Plot a 3D XPlot.Plotly chart.
     let inline plot (plot3D: Plot3D<'l, 't>) =
         plot3D.Trajectories
         |> Seq.map asScatter3D
@@ -30,13 +31,17 @@ module Plots3D =
         |> Chart.WithLegend true
 
     
+    /// Keep series's point count below a certain threshold.
+    /// Might improve rendering performance at the cost of plot resolution.
     let inline limitPointCount
-        (targetPointCount: int)
+        (pointCountThreshold: int)
         (series: Single3DTrajectory<'l, 't>)
         : Single3DTrajectory<'l, 't>
         =
-        let currentCount = series.T.Length
-        let keepEvery = currentCount / targetPointCount
+        let keepEvery =
+            let currentCount = series.T.Length
+            let ratio = currentCount / pointCountThreshold
+            if ratio < 1 then 1 else ratio
 
         let inline limit array =
             array

@@ -1,6 +1,9 @@
 ﻿namespace Embody.External
 
 
+/// A module that is responsible for working with data from Horizons System.
+///
+/// See: https://ssd.jpl.nasa.gov/horizons/
 module Horizon =
 
     module private FileSystem =

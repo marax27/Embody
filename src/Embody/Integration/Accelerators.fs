@@ -4,14 +4,14 @@ module Accelerators =
 
     open Embody.LinearAlgebra
 
-    let private power (squaredLength: float<'l^2>): float<'l^-3> =
+    let inline private power (squaredLength: float<'l^2>): float<'l^-3> =
         let result = (float squaredLength) ** -1.5
         result |> LanguagePrimitives.FloatWithMeasure
 
     /// Accelerator that calculates forces between every pair of bodies.
     ///
     /// TODO: optimize: r_ij and r_ji are currently calculated separately, even though r_ij = -r_ji.
-    let allBodiesConnected<[<Measure>] 'l, [<Measure>] 't>
+    let inline allBodiesConnected<[<Measure>] 'l, [<Measure>] 't>
         (positions: NumericalVector3<'l> array)
         (gravitationalParameters: float<'l^3/'t^2> array)
         : NumericalVector3<'l/'t^2> array

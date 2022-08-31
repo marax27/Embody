@@ -1,7 +1,7 @@
 ﻿namespace Embody.Simulation
 
 
-/// Contains transformations that can be applied to a simulation result.
+/// A module that contains transformations: functions that can be applied to a simulation result.
 module Transforms =
 
     open Embody.Domain
@@ -17,7 +17,6 @@ module Transforms =
 
     open Helpers
 
-
     /// Apply a metric to the results of a simulation.
     let inline applyMetric
         (metric: NumericalMetric<'l, 't, 'm, 'metric>)
@@ -27,6 +26,7 @@ module Transforms =
         |> Array.map (metric simulationResult.Preset)
 
 
+    /// Extract all time steps. It might be helpful when gathering data for a graph.
     let timeSteps
         (simulationResult: SimulationResult<'l, 't, 'm>)
         =
@@ -34,6 +34,7 @@ module Transforms =
         |> Array.map (fun step -> step.T)
 
 
+    /// Apply a predicate to position of a given body, for every recorded step of a simulation.
     let forPositionOf
         (bodyName: string)
         (predicate)
@@ -46,6 +47,7 @@ module Transforms =
         |> Array.map (fun step -> predicate step.R.[bodyIndex])
 
 
+    /// Apply a predicate to positions of a pair of bodies, for every recorded step of a simulation.
     let for2PositionsOf
         (firstBodyName: string)
         (secondBodyName: string)

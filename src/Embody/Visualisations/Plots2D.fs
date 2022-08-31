@@ -8,6 +8,7 @@ module Plots2D =
     let inline private asScatter2D (series: Single2DSeries<'x, 'y>) =
         Scatter(x = series.X, y = series.Y, name = series.Name)
 
+    /// Plot a 2D XPlot.Plotly chart.
     let plot (plot2D: Plot2D<'x, 'y>) =
 
         let layout = Layout2D.init ()
@@ -24,13 +25,17 @@ module Plots2D =
         |> Chart.WithLayout layout
 
 
+    /// Keep series's point count below a certain threshold.
+    /// Might improve rendering performance at the cost of plot resolution.
     let inline limitPointCount
-        (targetPointCount: int)
+        (pointCountThreshold: int)
         (series: Single2DSeries<'x, 'y>)
         : Single2DSeries<'x, 'y>
         =
-        let currentCount = series.X.Length
-        let keepEvery = currentCount / targetPointCount
+        let keepEvery =
+            let currentCount = series.X.Length
+            let ratio = currentCount / pointCountThreshold
+            if ratio < 1 then 1 else ratio
 
         let inline limit array =
             array
