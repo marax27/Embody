@@ -3,6 +3,14 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
+    <Title>Embody</Title>
+    <Version>0.1.0</Version>
+    <Description>F# toolset for creating, executing, and validating n-body simulations</Description>
+    <PackageId>Embody</PackageId>
+    <Authors>Kacper Tonia</Authors>
+    <Product>Embody</Product>
+    <PackageTags>simulation;n-body;fsharp;F#;physics</PackageTags>
   </PropertyGroup>
 
   <ItemGroup>
