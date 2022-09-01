@@ -52,3 +52,9 @@ In order to create a blank notebook:
     | 1.1 | 2.2 | 3.3 |
 7. Congratulations! You've successfully created a .NET interactive notebook, and imported the Embody package. The next step would be to define an $n$-body system. Example(s) can be found [here](notebooks/).
 
+
+## Future plans
+- Documentation page.
+- Theoretical background behind implemented numerical methods and orbital simulations.
+- Performance optimization.
+- Memory usage consideration (it is currently a bit too easy to have all your RAM consumed by a long-running simulation).
