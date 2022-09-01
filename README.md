@@ -10,9 +10,9 @@
 
 ## Summary
 
-**Embody** started out as a interactive .NET notebook where I could simulate and evaluate $n$-body systems (most notably, the Earth-Moon-Sun system, and Jupiter with its myriad of satellites). The notebook kept on growing, so ultimately I decided to move most of the code into a separate package.
+**Embody** started out as an interactive .NET notebook where I could simulate and evaluate $n$-body systems (most notably, the Earth-Moon-Sun system, and Jupiter with its myriad of moon). The notebook kept on growing, so ultimately I decided to move most of the code into a separate package.
 
-At the moment, Embody is a single package that tackles a couple different responsibilities: vector operations, numerical integration, and plot visualisation.
+Currently, Embody is a single package that tackles a couple different responsibilities, including: vector operations, numerical integration, and plot visualisation.
 
 ## Getting started
 
