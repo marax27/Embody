@@ -50,7 +50,7 @@ In order to create a blank notebook:
     |  x  |  y  |  z  |
     |-----|-----|-----|
     | 1.1 | 2.2 | 3.3 |
-7. Congratulations! You've successfully created a .NET interactive notebook, and imported the Embody package. The next step would be to define an $n$-body system. Example(s) can be found [here](notebooks/).
+7. Congratulations! You've successfully created a .NET interactive notebook, and imported the Embody package. The next step would be to define an $n$-body system. Example(s) can be found [here](./notebooks/).
 
 
 ## Future plans
