@@ -1,0 +1,179 @@
+#!fsharp
+
+// Earth, Moon, and Sun - a notebook that presents some features of Embody.
+
+#r "nuget: Embody"
+#r "nuget: XPlot.Plotly, 4.0.6"
+#r "nuget: XPlot.Plotly.Interactive, 4.0.6"
+
+#!fsharp
+
+// Define the n-body system, i.e.
+// all celestial bodies, their masses, initial positions and velocities.
+//
+// In this scenario, we consider the motion of Earth, Moon and Sun.
+// Bodies' masses and distances obtained from Wikipedia.
+// Velocities are calculated using an equation of orbital speed (for a Keplerian circular orbit).
+
+
+// Unfortunately, the power operator (**) doesn't work well with units of measure, yet.
+let sqrt (value: float<'u^2>): float<'u> =
+    Math.Sqrt(float value)
+    |> LanguagePrimitives.FloatWithMeasure
+
+
+module Scenario =
+
+    open Embody.LinearAlgebra
+    open Embody.Domain
+
+    open FSharp.Data.UnitSystems.SI.UnitSymbols
+
+    // Source: Wikipedia
+
+    let GravitationalConstant = 6.67430e-11<m^3/kg/s^2>
+
+    let SunMass = 1.9885e30<kg>
+
+    let EarthMass = 5.97217e24<kg>
+
+    let MoonSemiMajorAxis = 384399e3<m>
+
+    let EarthSemiMajorAxis = 149598023e3<m>
+
+    let EarthOrbitalSpeed =
+        sqrt (GravitationalConstant * SunMass / EarthSemiMajorAxis)
+
+    let MoonOrbitalSpeedRelativeToEarth =
+        sqrt (GravitationalConstant * EarthMass / MoonSemiMajorAxis)
+
+
+    let System = {
+        Bodies = [|
+            {
+                Name = "Sun"
+                Mass = SunMass
+                R = vector3 0.0<m> 0.0<m> 0.0<m>
+                V = vector3 0.0<m/s> 0.0<m/s> 0.0<m/s>
+            }
+            {
+                Name = "Earth"
+                Mass = EarthMass
+                R = vector3 EarthSemiMajorAxis 0.0<m> 0.0<m>
+                V = vector3 0.0<m/s> -EarthOrbitalSpeed 0.0<m/s>
+            }
+            {
+                Name = "Moon"
+                Mass = 7.342e22<kg>
+                R = vector3 EarthSemiMajorAxis MoonSemiMajorAxis 0.0<m>
+                V = vector3 MoonOrbitalSpeedRelativeToEarth -EarthOrbitalSpeed 0.0<m/s>
+            }
+        |]
+    }
+
+#!fsharp
+
+module Runner =
+
+    open FSharp.Data.UnitSystems.SI.UnitSymbols
+
+    open Embody.LinearAlgebra
+    open Embody.Integration
+    open Embody.Simulation
+
+    let run () =
+
+        let preset: SimulationPreset<m, s, kg> = {
+            System = Scenario.System
+            Settings = {
+                Accelerator = Accelerators.allBodiesConnected
+                TStart = 0.0<s>
+                TEnd = 3600.0<s> * 24.0 * 365.0  // 1 year
+                DeltaT = 3600.0<s>
+                GravitationalConstant = Scenario.GravitationalConstant
+            }
+            Integrator = Integrators.integrateVelocityVerlet
+        }
+
+        preset
+        |> Execution.simulate
+
+
+let result = Runner.run ()
+
+printfn "Generated %d steps." result.Steps.Length
+
+#!fsharp
+
+module Presentation =
+
+    open FSharp.Data.UnitSystems.SI.UnitSymbols
+
+    open Embody.Simulation
+    open Embody.Visualisations
+
+    let makeTrajectory (bodyName: string): Single3DTrajectory<m, s> =
+        {
+            Name = $"{bodyName}'s trajectory"
+            R = result |> Transforms.forPositionOf bodyName (fun R -> R)
+            T = result |> Transforms.timeSteps
+        }
+
+
+    let plotTrajectories (): XPlot.Plotly.PlotlyChart =
+
+        let trajectories =
+            Scenario.System.Bodies
+            |> Seq.map (fun body -> body.Name)
+            |> Seq.map makeTrajectory
+
+        {
+            Title = "Trajectories"
+            Trajectories = trajectories
+        }
+        |> Plots3D.plot
+
+
+Presentation.plotTrajectories ()
+
+#!fsharp
+
+module Validation =
+
+    open FSharp.Data.UnitSystems.SI.UnitSymbols
+
+    open Embody.Simulation
+    open Embody.Visualisations
+
+    let toDays (seconds: float<s>): float =
+        seconds / 3600.0<s> / 24.0
+
+
+    let plotTotalEnergyDeviation (): XPlot.Plotly.PlotlyChart =
+
+        let initialEnergy = Metrics.calculateTotalEnergy result.Preset result.Steps.[0]
+
+        let T = result
+                |> Transforms.timeSteps
+                |> Array.map toDays
+
+        let E = result
+                |> Transforms.applyMetric Metrics.calculateTotalEnergy
+                |> Array.map (fun energy -> abs (energy - initialEnergy))
+
+        {
+            Title = "System's total energy deviation over time"
+            XAxis = { Label = "Time [days]"; Type = Linear }
+            YAxis = { Label = "Total Energy Deviation"; Type = Logarithmic }
+            Series = [|
+                {
+                    Name = "Total energy deviation"
+                    X = T
+                    Y = E
+                }
+            |]
+        }
+        |> Plots2D.plot
+
+
+Validation.plotTotalEnergyDeviation ()
