@@ -16,7 +16,7 @@ Currently, Embody is a single package that tackles a couple different responsibi
 
 ## Getting started
 
-The standard way of working the library is via interactive .NET notebooks.
+The standard way of working with the library is via interactive .NET notebooks.
 
 ### Prerequisites
 - [VS Code](https://code.visualstudio.com/)
@@ -53,7 +53,7 @@ In order to create a blank notebook:
 7. Congratulations! You've successfully created a .NET interactive notebook, and imported the Embody package. The next step would be to define an $n$-body system. Example(s) can be found [here](https://github.com/marax27/Embody/tree/main/notebooks).
 
 
-## Future plans
+## Future plans / TODOs
 - Documentation page.
 - Theoretical background behind implemented numerical methods and orbital simulations.
 - Performance optimization.
