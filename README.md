@@ -1,6 +1,6 @@
 # Embody
 
-[![.NET](https://github.com/marax27/Embody/actions/workflows/build-and-run.yml/badge.svg?branch=main)](https://github.com/marax27/Embody/actions/workflows/build-and-run.yml)
+[![.NET Build and Test](https://github.com/marax27/Embody/actions/workflows/build-and-test.yml/badge.svg?branch=main)](https://github.com/marax27/Embody/actions/workflows/build-and-test.yml)
 [![GitHub issues](https://img.shields.io/github/issues-raw/marax27/Embody)](https://github.com/marax27/Embody/issues)
 [![GitHub](https://img.shields.io/github/license/marax27/Embody)](https://github.com/marax27/Embody/blob/main/LICENSE.txt)
 [![Nuget](https://img.shields.io/nuget/v/Embody)](https://www.nuget.org/packages/Embody)
