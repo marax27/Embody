@@ -22,12 +22,8 @@ jobs:
         run: dotnet restore
       - name: Build
         run: dotnet build --no-restore
-  test:
-    steps:
       - name: Test
         run: dotnet test --no-build --verbosity normal
-  docs:
-    steps:
       - name: Generate docs
         run: dotnet fsdocs build
       - name: Deploy docs
