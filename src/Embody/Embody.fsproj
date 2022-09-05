@@ -12,6 +12,8 @@
     <Product>Embody</Product>
     <PackageTags>simulation;n-body;fsharp;F#;physics</PackageTags>
     <RepositoryUrl>https://github.com/marax27/Embody</RepositoryUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>logo.png</PackageIcon>
   </PropertyGroup>
 
   <ItemGroup>
@@ -29,6 +31,17 @@
 	  <Compile Include="Visualisations\Layout2D.fs" />
 	  <Compile Include="Visualisations\Plots2D.fs" />
 	  <Compile Include="Visualisations\Plots3D.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\docs\img\logo.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+    <None Include="..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
