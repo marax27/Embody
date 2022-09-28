@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Major features in 𝒏 minutes
+</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Kacper Tonia">
+
+    <link rel="stylesheet" id="theme_link" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/materia/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+    <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+    <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link type="text/css" rel="stylesheet" href="/Embody/content/navbar-fixed-left.css" />
+    <link type="text/css" rel="stylesheet" href="/Embody/content/fsdocs-default.css" />
+    <link type="text/css" rel="stylesheet" href="/Embody/content/fsdocs-custom.css" />
+    <script type="text/javascript" src="/Embody/content/fsdocs-tips.js"></script>
+    <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+    <!-- END SEARCH BOX: this adds support for the search box -->
+    
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-light bg-secondary fixed-left" id="fsdocs-nav">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse navbar-nav-scroll" id="navbarsExampleDefault">
+            <a href="/Embody/"><img id="fsdocs-logo" src="/Embody/img/logo.png" /></a>
+            <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+            <div id="header">
+                <div class="searchbox" id="fsdocs-searchbox">
+                    <label for="search-by">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input data-search-input="" id="search-by" type="search" placeholder="Search..." />
+                    <span data-search-clear="">
+                        <i class="fas fa-times"></i>
+                    </span>
+                </div>
+            </div>
+
+            <!-- END SEARCH BOX: this adds support for the search box -->
+            <ul class="navbar-nav">
+                <li class="nav-header">Links</li>
+                <li class="nav-item" id="fsdocs-license-link"><a class="nav-link" href="https://github.com/marax27/Embody/blob/master/LICENSE.md">License</a></li>
+                <li class="nav-item" id="fsdocs-release-notes-link"><a class="nav-link" href="https://github.com/marax27/Embody/blob/master/RELEASE_NOTES.md">Release Notes</a></li>
+                <li class="nav-item" id="fsdocs-repository-link"><a class="nav-link" href="https://github.com/marax27/Embody/">Source Repository</a></li>
+                <li class="nav-header">
+  Documentation
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Embody/major-features-in-n-minutes.html">
+    Major features in &#119951; minutes
+
+  </a>
+</li>
+                <li class="nav-header">
+  API Reference
+</li>             
+<li class="nav-item">
+  <a class="nav-link" href="/Embody/reference/index.html">
+    All Namespaces
+  </a>
+</li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container">
+        <div class="masthead">
+            <h3 class="muted"><a href="/Embody/">Embody</a></h3>
+        </div>
+        <hr />
+        <div class="container" id="fsdocs-content">
+            <h1><a name="Major-features-in-minutes" class="anchor" href="#Major-features-in-minutes">Major features in 𝒏 minutes</a></h1>
+<h2><a name="Vector-arithmetic" class="anchor" href="#Vector-arithmetic">Vector arithmetic</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="id">Embody</span><span class="pn">.</span><span class="id">LinearAlgebra</span>
+<span class="k">open</span> <span onmouseout="hideTip(event, 'fs1', 1)" onmouseover="showTip(event, 'fs1', 1)" class="id">FSharp</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs2', 2)" onmouseover="showTip(event, 'fs2', 2)" class="id">Data</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs3', 3)" onmouseover="showTip(event, 'fs3', 3)" class="id">UnitSystems</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs4', 4)" onmouseover="showTip(event, 'fs4', 4)" class="id">SI</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs5', 5)" onmouseover="showTip(event, 'fs5', 5)" class="id">UnitSymbols</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs6', 6)" onmouseover="showTip(event, 'fs6', 6)" class="id">position</span> <span class="o">=</span> <span class="id">vector3</span> <span class="n">5.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs7', 7)" onmouseover="showTip(event, 'fs7', 7)" class="id">m</span><span class="pn">&gt;</span> <span class="n">4.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs7', 8)" onmouseover="showTip(event, 'fs7', 8)" class="id">m</span><span class="pn">&gt;</span> <span class="n">3.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs7', 9)" onmouseover="showTip(event, 'fs7', 9)" class="id">m</span><span class="pn">&gt;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs8', 10)" onmouseover="showTip(event, 'fs8', 10)" class="id">velocity</span> <span class="o">=</span> <span class="id">vector3</span> <span class="n">10.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs7', 11)" onmouseover="showTip(event, 'fs7', 11)" class="id">m</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs9', 12)" onmouseover="showTip(event, 'fs9', 12)" class="id">s</span><span class="pn">&gt;</span> <span class="n">0.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs7', 13)" onmouseover="showTip(event, 'fs7', 13)" class="id">m</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs9', 14)" onmouseover="showTip(event, 'fs9', 14)" class="id">s</span><span class="pn">&gt;</span> <span class="n">0.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs7', 15)" onmouseover="showTip(event, 'fs7', 15)" class="id">m</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs9', 16)" onmouseover="showTip(event, 'fs9', 16)" class="id">s</span><span class="pn">&gt;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs10', 17)" onmouseover="showTip(event, 'fs10', 17)" class="id">deltaT</span> <span class="o">=</span> <span class="n">0.1</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs9', 18)" onmouseover="showTip(event, 'fs9', 18)" class="rt">s</span><span class="pn">&gt;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs11', 19)" onmouseover="showTip(event, 'fs11', 19)" class="id">newPosition</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs6', 20)" onmouseover="showTip(event, 'fs6', 20)" class="id">position</span> <span class="o">+</span> <span onmouseout="hideTip(event, 'fs8', 21)" onmouseover="showTip(event, 'fs8', 21)" class="id">velocity</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs10', 22)" onmouseover="showTip(event, 'fs10', 22)" class="id">deltaT</span>
+
+<span onmouseout="hideTip(event, 'fs12', 23)" onmouseover="showTip(event, 'fs12', 23)" class="fn">printfn</span> <span class="s">&quot;</span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs11', 24)" onmouseover="showTip(event, 'fs11', 24)" class="id">newPosition</span>
+</code></pre>
+<h2><a name="Celestial-system-definition" class="anchor" href="#Celestial-system-definition">Celestial system definition</a></h2>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="id">Embody</span><span class="pn">.</span><span class="id">Domain</span>
+<span class="k">open</span> <span class="id">Embody</span><span class="pn">.</span><span class="id">LinearAlgebra</span>
+
+<span class="c">(* Instead of relying on SI unit system, one can choose their own units.</span>
+<span class="c">It can be useful when comparing with external data that use particular units.</span>
+<span class="c">The downside is that some parameters (e.g. gravitational constant)</span>
+<span class="c">depend on a choice of units and will have to be recalculated. *)</span>
+<span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs13', 25)" onmouseover="showTip(event, 'fs13', 25)" class="rt">Measure</span><span class="pn">&gt;]</span> <span class="k">type</span> <span onmouseout="hideTip(event, 'fs14', 26)" onmouseover="showTip(event, 'fs14', 26)" class="rt">km</span>
+<span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs13', 27)" onmouseover="showTip(event, 'fs13', 27)" class="rt">Measure</span><span class="pn">&gt;]</span> <span class="k">type</span> <span onmouseout="hideTip(event, 'fs15', 28)" onmouseover="showTip(event, 'fs15', 28)" class="rt">s</span>
+<span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs13', 29)" onmouseover="showTip(event, 'fs13', 29)" class="rt">Measure</span><span class="pn">&gt;]</span> <span class="k">type</span> <span onmouseout="hideTip(event, 'fs16', 30)" onmouseover="showTip(event, 'fs16', 30)" class="rt">earthMass</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs17', 31)" onmouseover="showTip(event, 'fs17', 31)" class="id">earthOrbitRadius</span> <span class="o">=</span> <span class="n">150e6</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs14', 32)" onmouseover="showTip(event, 'fs14', 32)" class="rt">km</span><span class="pn">&gt;</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs18', 33)" onmouseover="showTip(event, 'fs18', 33)" class="id">averageEarthSpeed</span> <span class="o">=</span> <span class="n">29.78</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs14', 34)" onmouseover="showTip(event, 'fs14', 34)" class="rt">km</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs15', 35)" onmouseover="showTip(event, 'fs15', 35)" class="rt">s</span><span class="pn">&gt;</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs19', 36)" onmouseover="showTip(event, 'fs19', 36)" class="id">system</span> <span class="pn">:</span> <span class="id">CelestialSystem</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs14', 37)" onmouseover="showTip(event, 'fs14', 37)" class="id">km</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs15', 38)" onmouseover="showTip(event, 'fs15', 38)" class="id">s</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs16', 39)" onmouseover="showTip(event, 'fs16', 39)" class="id">earthMass</span><span class="pn">&gt;</span> <span class="o">=</span> <span class="pn">{</span>
+    <span class="id">Bodies</span> <span class="o">=</span> <span class="pn">[|</span>
+        <span class="pn">{</span>
+            <span class="id">Name</span> <span class="o">=</span> <span class="s">&quot;Sol&quot;</span>
+            <span class="id">Mass</span> <span class="o">=</span> <span class="n">332950.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs16', 40)" onmouseover="showTip(event, 'fs16', 40)" class="id">earthMass</span><span class="pn">&gt;</span>
+            <span class="id">R</span> <span class="o">=</span> <span class="id">Vector3</span><span class="pn">.</span><span class="id">zero</span><span class="pn">(</span><span class="pn">)</span>
+            <span onmouseout="hideTip(event, 'fs20', 41)" onmouseover="showTip(event, 'fs20', 41)" class="id">V</span> <span class="o">=</span> <span class="id">Vector3</span><span class="pn">.</span><span class="id">zero</span><span class="pn">(</span><span class="pn">)</span>
+        <span class="pn">}</span>
+        <span class="pn">{</span>
+            <span class="id">Name</span> <span class="o">=</span> <span class="s">&quot;Earth&quot;</span>
+            <span class="id">Mass</span> <span class="o">=</span> <span class="n">1.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs16', 42)" onmouseover="showTip(event, 'fs16', 42)" class="id">earthMass</span><span class="pn">&gt;</span>
+            <span class="id">R</span> <span class="o">=</span> <span class="id">vector3</span> <span onmouseout="hideTip(event, 'fs17', 43)" onmouseover="showTip(event, 'fs17', 43)" class="id">earthOrbitRadius</span> <span class="n">0.0</span><span class="pn">&lt;</span><span class="id">_</span><span class="pn">&gt;</span> <span class="n">0.0</span><span class="pn">&lt;</span><span class="id">_</span><span class="pn">&gt;</span>
+            <span onmouseout="hideTip(event, 'fs20', 44)" onmouseover="showTip(event, 'fs20', 44)" class="id">V</span> <span class="o">=</span> <span class="id">vector3</span> <span class="n">0.0</span><span class="pn">&lt;</span><span class="id">_</span><span class="pn">&gt;</span> <span onmouseout="hideTip(event, 'fs18', 45)" onmouseover="showTip(event, 'fs18', 45)" class="id">averageEarthSpeed</span> <span class="n">0.0</span><span class="pn">&lt;</span><span class="id">_</span><span class="pn">&gt;</span>
+        <span class="pn">}</span>
+    <span class="pn">|]</span>
+<span class="pn">}</span>
+</code></pre>
+<h2><a name="Simulation" class="anchor" href="#Simulation">Simulation</a></h2>
+<p>Assuming we'd like to simulate the motion of the above system:</p>
+<pre class="fssnip highlighted"><code lang="fsharp"><span class="k">open</span> <span class="id">Embody</span><span class="pn">.</span><span class="id">Integration</span>
+<span class="k">open</span> <span class="id">Embody</span><span class="pn">.</span><span class="id">Simulation</span>
+
+<span class="c">(*</span>
+<span class="c">    The simulation preset expects a gravitational constant G expressed in</span>
+<span class="c">    &#39;kilometers&#39;, &#39;seconds&#39; and &#39;earth masses&#39;.</span>
+<span class="c">    One can convert a common value of G to desired units. When units of measure</span>
+<span class="c">    are explicitly specified, the compiler will verify the unit of a calculation result.</span>
+
+<span class="c">    `kg` and `m` are used for conversion purposes. They are not used in the simulation.</span>
+<span class="c">*)</span>
+<span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs13', 46)" onmouseover="showTip(event, 'fs13', 46)" class="rt">Measure</span><span class="pn">&gt;]</span> <span class="k">type</span> <span onmouseout="hideTip(event, 'fs21', 47)" onmouseover="showTip(event, 'fs21', 47)" class="rt">kg</span>
+<span class="pn">[&lt;</span><span onmouseout="hideTip(event, 'fs13', 48)" onmouseover="showTip(event, 'fs13', 48)" class="rt">Measure</span><span class="pn">&gt;]</span> <span class="k">type</span> <span onmouseout="hideTip(event, 'fs22', 49)" onmouseover="showTip(event, 'fs22', 49)" class="rt">m</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs23', 50)" onmouseover="showTip(event, 'fs23', 50)" class="id">gravitationalConstant</span><span class="pn">:</span> <span onmouseout="hideTip(event, 'fs24', 51)" onmouseover="showTip(event, 'fs24', 51)" class="vt">float</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs14', 52)" onmouseover="showTip(event, 'fs14', 52)" class="rt">km</span><span class="id">^</span><span class="n">3</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs16', 53)" onmouseover="showTip(event, 'fs16', 53)" class="rt">earthMass</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs15', 54)" onmouseover="showTip(event, 'fs15', 54)" class="rt">s</span><span class="id">^</span><span class="n">2</span><span class="pn">&gt;</span> <span class="o">=</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs25', 55)" onmouseover="showTip(event, 'fs25', 55)" class="fn">G</span> <span class="o">=</span> <span class="n">6.674e-11</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs22', 56)" onmouseover="showTip(event, 'fs22', 56)" class="rt">m</span><span class="id">^</span><span class="n">3</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs21', 57)" onmouseover="showTip(event, 'fs21', 57)" class="rt">kg</span><span class="o">/</span><span onmouseout="hideTip(event, 'fs15', 58)" onmouseover="showTip(event, 'fs15', 58)" class="rt">s</span><span class="id">^</span><span class="n">2</span><span class="pn">&gt;</span>                    <span class="c">// commonly known value of G</span>
+
+    <span class="c">// No time conversion needed: seconds are used in both cases.</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs26', 59)" onmouseover="showTip(event, 'fs26', 59)" class="fn">m2km</span> <span class="o">=</span> <span class="n">1.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs14', 60)" onmouseover="showTip(event, 'fs14', 60)" class="rt">km</span><span class="pn">&gt;</span><span class="o">/</span><span class="n">1000.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs22', 61)" onmouseover="showTip(event, 'fs22', 61)" class="rt">m</span><span class="pn">&gt;</span>                     <span class="c">// distance conversion</span>
+    <span class="k">let</span> <span onmouseout="hideTip(event, 'fs27', 62)" onmouseover="showTip(event, 'fs27', 62)" class="fn">kg2EarthMass</span> <span class="o">=</span> <span class="n">1.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs16', 63)" onmouseover="showTip(event, 'fs16', 63)" class="rt">earthMass</span><span class="pn">&gt;</span><span class="o">/</span><span class="n">5.9722e24</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs21', 64)" onmouseover="showTip(event, 'fs21', 64)" class="rt">kg</span><span class="pn">&gt;</span>  <span class="c">// mass conversion</span>
+    <span onmouseout="hideTip(event, 'fs25', 65)" onmouseover="showTip(event, 'fs25', 65)" class="fn">G</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs26', 66)" onmouseover="showTip(event, 'fs26', 66)" class="fn">m2km</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs26', 67)" onmouseover="showTip(event, 'fs26', 67)" class="fn">m2km</span> <span class="o">*</span> <span onmouseout="hideTip(event, 'fs26', 68)" onmouseover="showTip(event, 'fs26', 68)" class="fn">m2km</span> <span class="o">/</span> <span onmouseout="hideTip(event, 'fs27', 69)" onmouseover="showTip(event, 'fs27', 69)" class="fn">kg2EarthMass</span>
+
+
+<span class="c">(* Integrator settings.</span>
+<span class="c">    - The number of steps depends on `DeltaT`, `TStart` and `TEnd` parameters.</span>
+<span class="c">    - Accelerator: a function that computes body accelerations.</span>
+<span class="c"> *)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs28', 70)" onmouseover="showTip(event, 'fs28', 70)" class="id">settings</span><span class="pn">:</span> <span class="id">IntegratorSettings</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs14', 71)" onmouseover="showTip(event, 'fs14', 71)" class="id">km</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs15', 72)" onmouseover="showTip(event, 'fs15', 72)" class="id">s</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs16', 73)" onmouseover="showTip(event, 'fs16', 73)" class="id">earthMass</span><span class="pn">&gt;</span> <span class="o">=</span> <span class="pn">{</span>
+    <span class="id">DeltaT</span> <span class="o">=</span> <span class="n">3600.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs15', 74)" onmouseover="showTip(event, 'fs15', 74)" class="id">s</span><span class="pn">&gt;</span>
+    <span class="id">TStart</span> <span class="o">=</span> <span class="n">0.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs15', 75)" onmouseover="showTip(event, 'fs15', 75)" class="id">s</span><span class="pn">&gt;</span>
+    <span class="id">TEnd</span> <span class="o">=</span> <span class="n">3600.0</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs15', 76)" onmouseover="showTip(event, 'fs15', 76)" class="id">s</span><span class="pn">&gt;</span> <span class="pn">*</span> <span class="n">24.0</span> <span class="pn">*</span> <span class="n">365.25</span>
+    <span class="id">GravitationalConstant</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs23', 77)" onmouseover="showTip(event, 'fs23', 77)" class="id">gravitationalConstant</span>
+    <span class="id">Accelerator</span> <span class="o">=</span> <span class="id">Accelerators</span><span class="pn">.</span><span class="id">allBodiesConnected</span>
+<span class="pn">}</span>
+
+
+<span class="c">(* Preset is a wrapper on all the things needed to kick off a simulation.</span>
+<span class="c">    - Celestial system</span>
+<span class="c">    - Integrator settings</span>
+<span class="c">    - Integrator: a function that implements a numerical method.</span>
+<span class="c"> *)</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs29', 78)" onmouseover="showTip(event, 'fs29', 78)" class="id">preset</span><span class="pn">:</span> <span class="id">SimulationPreset</span><span class="pn">&lt;</span><span onmouseout="hideTip(event, 'fs14', 79)" onmouseover="showTip(event, 'fs14', 79)" class="id">km</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs15', 80)" onmouseover="showTip(event, 'fs15', 80)" class="id">s</span><span class="pn">,</span> <span onmouseout="hideTip(event, 'fs16', 81)" onmouseover="showTip(event, 'fs16', 81)" class="id">earthMass</span><span class="pn">&gt;</span> <span class="o">=</span> <span class="pn">{</span>
+    <span onmouseout="hideTip(event, 'fs30', 82)" onmouseover="showTip(event, 'fs30', 82)" class="id">System</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs19', 83)" onmouseover="showTip(event, 'fs19', 83)" class="id">system</span>
+    <span class="id">Settings</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs28', 84)" onmouseover="showTip(event, 'fs28', 84)" class="id">settings</span>
+    <span class="id">Integrator</span> <span class="o">=</span> <span class="id">Integrators</span><span class="pn">.</span><span class="id">integrateVelocityVerlet</span>
+<span class="pn">}</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs31', 85)" onmouseover="showTip(event, 'fs31', 85)" class="id">result</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs29', 86)" onmouseover="showTip(event, 'fs29', 86)" class="id">preset</span> <span class="o">|&gt;</span> <span class="id">Execution</span><span class="pn">.</span><span class="id">simulate</span>
+
+<span onmouseout="hideTip(event, 'fs12', 87)" onmouseover="showTip(event, 'fs12', 87)" class="fn">printfn</span> <span class="s">&quot;Generated </span><span class="pf">%d</span><span class="s"> steps (~</span><span class="pf">%f</span><span class="s"> hours in a year).&quot;</span> <span onmouseout="hideTip(event, 'fs31', 88)" onmouseover="showTip(event, 'fs31', 88)" class="id">result</span><span class="pn">.</span><span class="id">Steps</span><span class="pn">.</span><span class="id">Length</span> <span class="pn">(</span><span class="n">24.0</span><span class="o">*</span><span class="n">365.25</span><span class="pn">)</span>
+
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs32', 89)" onmouseover="showTip(event, 'fs32', 89)" class="id">lastStep</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs31', 90)" onmouseover="showTip(event, 'fs31', 90)" class="id">result</span><span class="pn">.</span><span class="id">Steps</span> <span class="o">|&gt;</span> <span onmouseout="hideTip(event, 'fs33', 91)" onmouseover="showTip(event, 'fs33', 91)" class="m">Array</span><span class="pn">.</span><span onmouseout="hideTip(event, 'fs34', 92)" onmouseover="showTip(event, 'fs34', 92)" class="id">last</span>
+<span class="k">let</span> <span onmouseout="hideTip(event, 'fs35', 93)" onmouseover="showTip(event, 'fs35', 93)" class="id">earthPosition</span> <span class="o">=</span> <span onmouseout="hideTip(event, 'fs32', 94)" onmouseover="showTip(event, 'fs32', 94)" class="id">lastStep</span><span class="pn">.</span><span class="id">R</span><span class="pn">.</span><span class="pn">[</span><span class="n">1</span><span class="pn">]</span> <span class="o">-</span> <span onmouseout="hideTip(event, 'fs32', 95)" onmouseover="showTip(event, 'fs32', 95)" class="id">lastStep</span><span class="pn">.</span><span class="id">R</span><span class="pn">.</span><span class="pn">[</span><span class="n">0</span><span class="pn">]</span>
+<span onmouseout="hideTip(event, 'fs12', 96)" onmouseover="showTip(event, 'fs12', 96)" class="fn">printfn</span> <span class="s">&quot;Final Earth&#39;s position (relative to Sun): </span><span class="pf">%A</span><span class="s">&quot;</span> <span onmouseout="hideTip(event, 'fs35', 97)" onmouseover="showTip(event, 'fs35', 97)" class="id">earthPosition</span>
+</code></pre>
+
+            <div class="fsdocs-tip" id="fs1">Multiple items<br />namespace Microsoft.FSharp<br /><br />--------------------<br />namespace FSharp</div>
+<div class="fsdocs-tip" id="fs2">namespace Microsoft.FSharp.Data</div>
+<div class="fsdocs-tip" id="fs3">namespace Microsoft.FSharp.Data.UnitSystems</div>
+<div class="fsdocs-tip" id="fs4">namespace Microsoft.FSharp.Data.UnitSystems.SI</div>
+<div class="fsdocs-tip" id="fs5">namespace Microsoft.FSharp.Data.UnitSystems.SI.UnitSymbols</div>
+<div class="fsdocs-tip" id="fs6">val position: float&lt;s&gt;</div>
+<div class="fsdocs-tip" id="fs7">[&lt;Measure&gt;]
+type m = Data.UnitSystems.SI.UnitNames.metre<br /><em>&lt;summary&gt;
+ A synonym for Metre, the SI unit of length
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs8">val velocity: float</div>
+<div class="fsdocs-tip" id="fs9">[&lt;Measure&gt;]
+type s = Data.UnitSystems.SI.UnitNames.second<br /><em>&lt;summary&gt;
+ A synonym for second, the SI unit of time
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs10">val deltaT: float&lt;s&gt;</div>
+<div class="fsdocs-tip" id="fs11">val newPosition: float&lt;s&gt;</div>
+<div class="fsdocs-tip" id="fs12">val printfn: format: Printf.TextWriterFormat&lt;&#39;T&gt; -&gt; &#39;T<br /><em>&lt;summary&gt;Print to &lt;c&gt;stdout&lt;/c&gt; using the given format, and add a newline.&lt;/summary&gt;<br />&lt;param name=&quot;format&quot;&gt;The formatter.&lt;/param&gt;<br />&lt;returns&gt;The formatted result.&lt;/returns&gt;<br />&lt;example&gt;See &lt;c&gt;Printf.printfn&lt;/c&gt; (link: &lt;see cref=&quot;M:Microsoft.FSharp.Core.PrintfModule.PrintFormatLine``1&quot; /&gt;) for examples.&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs13">Multiple items<br />type MeasureAttribute =
+  inherit Attribute
+  new: unit -&gt; MeasureAttribute<br /><em>&lt;summary&gt;Adding this attribute to a type causes it to be interpreted as a unit of measure.
+ This may only be used under very limited conditions.&lt;/summary&gt;<br />&lt;category&gt;Attributes&lt;/category&gt;</em><br /><br />--------------------<br />new: unit -&gt; MeasureAttribute</div>
+<div class="fsdocs-tip" id="fs14">[&lt;Measure&gt;]
+type km</div>
+<div class="fsdocs-tip" id="fs15">[&lt;Measure&gt;]
+type s</div>
+<div class="fsdocs-tip" id="fs16">[&lt;Measure&gt;]
+type earthMass</div>
+<div class="fsdocs-tip" id="fs17">val earthOrbitRadius: float&lt;km&gt;</div>
+<div class="fsdocs-tip" id="fs18">val averageEarthSpeed: float&lt;km/s&gt;</div>
+<div class="fsdocs-tip" id="fs19">val system: obj</div>
+<div class="fsdocs-tip" id="fs20">[&lt;Measure&gt;]
+type V = Data.UnitSystems.SI.UnitNames.volt<br /><em>&lt;summary&gt;
+ A synonym for volt, the SI unit of electric potential difference, electromotive force
+&lt;/summary&gt;</em></div>
+<div class="fsdocs-tip" id="fs21">[&lt;Measure&gt;]
+type kg</div>
+<div class="fsdocs-tip" id="fs22">[&lt;Measure&gt;]
+type m</div>
+<div class="fsdocs-tip" id="fs23">val gravitationalConstant: float&lt;km ^ 3/(earthMass s ^ 2)&gt;</div>
+<div class="fsdocs-tip" id="fs24">Multiple items<br />val float: value: &#39;T -&gt; float (requires member op_Explicit)<br /><em>&lt;summary&gt;Converts the argument to 64-bit float. This is a direct conversion for all 
+ primitive numeric types. For strings, the input is converted using &lt;c&gt;Double.Parse()&lt;/c&gt;  
+ with InvariantCulture settings. Otherwise the operation requires an appropriate
+ static conversion method on the input type.&lt;/summary&gt;<br />&lt;param name=&quot;value&quot;&gt;The input value.&lt;/param&gt;<br />&lt;returns&gt;The converted float&lt;/returns&gt;<br />&lt;example id=&quot;float-example&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;&lt;/code&gt;&lt;/example&gt;</em><br /><br />--------------------<br />[&lt;Struct&gt;]
+type float = System.Double<br /><em>&lt;summary&gt;An abbreviation for the CLI type &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category&gt;Basic Types&lt;/category&gt;</em><br /><br />--------------------<br />type float&lt;&#39;Measure&gt; =
+  float<br /><em>&lt;summary&gt;The type of double-precision floating point numbers, annotated with a unit of measure.
+ The unit of measure is erased in compiled code and when values of this type
+ are analyzed using reflection. The type is representationally equivalent to
+ &lt;see cref=&quot;T:System.Double&quot; /&gt;.&lt;/summary&gt;<br />&lt;category index=&quot;6&quot;&gt;Basic Types with Units of Measure&lt;/category&gt;</em></div>
+<div class="fsdocs-tip" id="fs25">val G: float&lt;m ^ 3/(kg s ^ 2)&gt;</div>
+<div class="fsdocs-tip" id="fs26">val m2km: float&lt;km/m&gt;</div>
+<div class="fsdocs-tip" id="fs27">val kg2EarthMass: float&lt;earthMass/kg&gt;</div>
+<div class="fsdocs-tip" id="fs28">val settings: obj</div>
+<div class="fsdocs-tip" id="fs29">val preset: obj</div>
+<div class="fsdocs-tip" id="fs30">namespace System</div>
+<div class="fsdocs-tip" id="fs31">val result: obj</div>
+<div class="fsdocs-tip" id="fs32">val lastStep: obj</div>
+<div class="fsdocs-tip" id="fs33">module Array
+
+from Microsoft.FSharp.Collections<br /><em>&lt;summary&gt;Contains operations for working with arrays.&lt;/summary&gt;<br />&lt;remarks&gt;
+  See also &lt;a href=&quot;https://docs.microsoft.com/dotnet/fsharp/language-reference/arrays&quot;&gt;F# Language Guide - Arrays&lt;/a&gt;.
+ &lt;/remarks&gt;</em></div>
+<div class="fsdocs-tip" id="fs34">val last: array: &#39;T[] -&gt; &#39;T<br /><em>&lt;summary&gt;Returns the last element of the array.&lt;/summary&gt;<br />&lt;param name=&quot;array&quot;&gt;The input array.&lt;/param&gt;<br />&lt;returns&gt;The last element of the array.&lt;/returns&gt;<br />&lt;exception cref=&quot;T:System.ArgumentNullException&quot;&gt;Thrown when the input array is null.&lt;/exception&gt;<br />&lt;exception cref=&quot;T:System.ArgumentException&quot;&gt;Thrown when the input does not have any elements.&lt;/exception&gt;<br />&lt;example id=&quot;last-1&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ [| &quot;pear&quot;; &quot;banana&quot; |] |&amp;gt; Array.last
+ &lt;/code&gt;
+ Evaluates to &lt;c&gt;banana&lt;/c&gt;&lt;/example&gt;<br />&lt;example id=&quot;last-2&quot;&gt;&lt;code lang=&quot;fsharp&quot;&gt;
+ [| |] |&amp;gt; Array.last
+ &lt;/code&gt;
+ Throws &lt;c&gt;ArgumentException&lt;/c&gt;&lt;/example&gt;</em></div>
+<div class="fsdocs-tip" id="fs35">val earthPosition: obj</div>
+
+        </div>
+
+        <!-- BEGIN SEARCH BOX: this adds support for the search box -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.css" />
+        <script type="text/javascript">var fsdocs_search_baseurl = '/Embody/';</script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/lunr.js/2.3.8/lunr.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/JavaScript-autoComplete/1.0.4/auto-complete.min.js"></script>
+        <script type="text/javascript" src="/Embody/content/fsdocs-search.js"></script>
+        <!-- END SEARCH BOX: this adds support for the search box -->
+    </div>
+</body>
+
+</html>
