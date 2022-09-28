@@ -14,8 +14,6 @@ module private HelperTypes =
 
     type GravitationalParameter<[<Measure>] 'l, [<Measure>] 't> = float<'l^3/'t^2>
 
-    type GravitationalConstant<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm> = float<'l^3*'m^-1*'t^-2>
-
 open HelperTypes
 
 
@@ -34,8 +32,7 @@ type IntegratorStep<[<Measure>] 'l, [<Measure>] 't> = {
 }
 
 /// Contains non-domain integrator parameters.
-type IntegratorSettings<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm> = {
-    GravitationalConstant: GravitationalConstant<'l, 't, 'm>
+type IntegratorSettings<[<Measure>] 'l, [<Measure>] 't> = {
     TStart: Time<'t>
     TEnd: Time<'t>
     DeltaT: Time<'t>
@@ -43,6 +40,6 @@ type IntegratorSettings<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm> = {
 }
 
 /// A basis for actual integrators.
-type Integrator<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm> =
-    CelestialSystem<'l, 't, 'm> -> IntegratorSettings<'l, 't, 'm>
+type Integrator<[<Measure>] 'l, [<Measure>] 't> =
+    CelestialSystem<'l, 't> -> IntegratorSettings<'l, 't>
         -> IntegratorStep<'l, 't> array

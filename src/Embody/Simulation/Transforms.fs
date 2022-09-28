@@ -10,7 +10,7 @@ module Transforms =
 
         let inline findBodyIndex
             (bodyName: string)
-            (bodies: CelestialBody<'l, 't, 'm> seq)
+            (bodies: CelestialBody<'l, 't> seq)
             : int
             =
             bodies |> Seq.findIndex (fun body -> body.Name = bodyName)
@@ -19,8 +19,8 @@ module Transforms =
 
     /// Apply a metric to the results of a simulation.
     let inline applyMetric
-        (metric: NumericalMetric<'l, 't, 'm, 'metric>)
-        (simulationResult: SimulationResult<'l, 't, 'm>)
+        (metric: NumericalMetric<'l, 't, 'metric>)
+        (simulationResult: SimulationResult<'l, 't>)
         =
         simulationResult.Steps
         |> Array.map (metric simulationResult.Preset)
@@ -28,7 +28,7 @@ module Transforms =
 
     /// Extract all time steps. It might be helpful when gathering data for a graph.
     let timeSteps
-        (simulationResult: SimulationResult<'l, 't, 'm>)
+        (simulationResult: SimulationResult<'l, 't>)
         =
         simulationResult.Steps
         |> Array.map (fun step -> step.T)
@@ -38,7 +38,7 @@ module Transforms =
     let forPositionOf
         (bodyName: string)
         (predicate)
-        (simulationResult: SimulationResult<'l, 't, 'm>)
+        (simulationResult: SimulationResult<'l, 't>)
         =
         let bodies = simulationResult.Preset.System.Bodies
         let bodyIndex = bodies |> findBodyIndex bodyName
@@ -52,7 +52,7 @@ module Transforms =
         (firstBodyName: string)
         (secondBodyName: string)
         (predicate)
-        (simulationResult: SimulationResult<'l, 't, 'm>)
+        (simulationResult: SimulationResult<'l, 't>)
         =
         let bodies = simulationResult.Preset.System.Bodies
         let firstBodyIndex = bodies |> findBodyIndex firstBodyName
@@ -67,7 +67,7 @@ module Transforms =
         (orbitingBodyName: string)
         (centralBodyName: string)
         (predicate)
-        (simulationResult: SimulationResult<'l, 't, 'm>)
+        (simulationResult: SimulationResult<'l, 't>)
         =
         let bodies = simulationResult.Preset.System.Bodies
         let orbitingBodyIndex = bodies |> findBodyIndex orbitingBodyName

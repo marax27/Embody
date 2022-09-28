@@ -8,9 +8,8 @@ module internal Samples =
     open Embody.Simulation
     open FSharp.Data.UnitSystems.SI.UnitSymbols
 
-    let Preset: SimulationPreset<m, s, kg> = {
+    let Preset: SimulationPreset<m, s> = {
         Settings = {
-            GravitationalConstant = 0.0<_>
             TStart = 0.0<s>
             TEnd = 0.5<s>
             DeltaT = 0.1<s>

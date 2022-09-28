@@ -20,20 +20,10 @@ module Integrators =
             |> Array.map (fun (x, x') -> x + x' * Δt)
 
 
-        /// Calculate bodies' gravitational parameters.
-        let inline calculateGravitationalParameters
-            (system: CelestialSystem<'l, 't, 'm>)
-            (settings: IntegratorSettings<'l, 't, 'm>)
-            : float<'l^3/'t^2> array
-            =
-            let G = settings.GravitationalConstant
-            system.Bodies |> Array.map (fun body -> G * body.Mass)
-
-
         /// Function that serves as a template for common integrators. Reduces boilerplate.
-        let inline baseIntegrate<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm>
-            (system: CelestialSystem<'l, 't, 'm>)
-            (settings: IntegratorSettings<'l, 't, 'm>)
+        let inline baseIntegrate<[<Measure>] 'l, [<Measure>] 't>
+            (system: CelestialSystem<'l, 't>)
+            (settings: IntegratorSettings<'l, 't>)
             (calculateNextStep: int -> IntegratorStep<'l, 't> -> IntegratorStep<'l, 't>)
             : IntegratorStep<'l, 't> array
             =
@@ -66,13 +56,13 @@ module Integrators =
 
 
     /// Forward Euler integration method (commonly known as the Euler method).
-    let integrateForwardEuler<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm>
-        (system: CelestialSystem<'l, 't, 'm>)
-        (settings: IntegratorSettings<'l, 't, 'm>)
+    let integrateForwardEuler<[<Measure>] 'l, [<Measure>] 't>
+        (system: CelestialSystem<'l, 't>)
+        (settings: IntegratorSettings<'l, 't>)
         : IntegratorStep<'l, 't> array
         =
         let Δt = settings.DeltaT
-        let μs = calculateGravitationalParameters system settings
+        let μs = system.Bodies |> Array.map (fun body -> body.GravitationalParameter)
 
         let inline calculateNextStep (index: int) (step: IntegratorStep<'l, 't>) =
             let A = settings.Accelerator step.R μs
@@ -86,14 +76,14 @@ module Integrators =
 
 
     /// Midpoint integration method.
-    let integrateMidpoint<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm>
-        (system: CelestialSystem<'l, 't, 'm>)
-        (settings: IntegratorSettings<'l, 't, 'm>)
+    let integrateMidpoint<[<Measure>] 'l, [<Measure>] 't>
+        (system: CelestialSystem<'l, 't>)
+        (settings: IntegratorSettings<'l, 't>)
         : IntegratorStep<'l, 't> array
         =
         let Δt = settings.DeltaT
         let Δt1_2 = 0.5 * Δt
-        let μs = calculateGravitationalParameters system settings
+        let μs = system.Bodies |> Array.map (fun body -> body.GravitationalParameter)
 
         let inline calculateNextStep (index: int) (step: IntegratorStep<'l, 't>) =
             let A = settings.Accelerator step.R μs
@@ -110,14 +100,14 @@ module Integrators =
 
 
     /// 4th Runge-Kutta method (aka RK4).
-    let integrateRK4<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm>
-        (system: CelestialSystem<'l, 't, 'm>)
-        (settings: IntegratorSettings<'l, 't, 'm>)
+    let integrateRK4<[<Measure>] 'l, [<Measure>] 't>
+        (system: CelestialSystem<'l, 't>)
+        (settings: IntegratorSettings<'l, 't>)
         : IntegratorStep<'l, 't> array
         =
         let Δt = settings.DeltaT
         let Δt1_2 = 0.5 * Δt
-        let μs = calculateGravitationalParameters system settings
+        let μs = system.Bodies |> Array.map (fun body -> body.GravitationalParameter)
 
         let inline accelerate R = settings.Accelerator R μs
 
@@ -151,14 +141,14 @@ module Integrators =
 
 
     /// Velocity Verlet method.
-    let integrateVelocityVerlet<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm>
-        (system: CelestialSystem<'l, 't, 'm>)
-        (settings: IntegratorSettings<'l, 't, 'm>)
+    let integrateVelocityVerlet<[<Measure>] 'l, [<Measure>] 't>
+        (system: CelestialSystem<'l, 't>)
+        (settings: IntegratorSettings<'l, 't>)
         : IntegratorStep<'l, 't> array
         =
         let Δt = settings.DeltaT
         let Δt1_2 = 0.5 * Δt
-        let μs = calculateGravitationalParameters system settings
+        let μs = system.Bodies |> Array.map (fun body -> body.GravitationalParameter)
 
         let initialPositions = system.Bodies |> Array.map (fun body -> body.R)
         let mutable Atmp = settings.Accelerator initialPositions μs
@@ -180,14 +170,14 @@ module Integrators =
 
 
     /// Leapfrog method.
-    let integrateLeapfrog<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm>
-        (system: CelestialSystem<'l, 't, 'm>)
-        (settings: IntegratorSettings<'l, 't, 'm>)
+    let integrateLeapfrog<[<Measure>] 'l, [<Measure>] 't>
+        (system: CelestialSystem<'l, 't>)
+        (settings: IntegratorSettings<'l, 't>)
         : IntegratorStep<'l, 't> array
         =
         let Δt = settings.DeltaT
         let Δt1_2 = 0.5 * Δt
-        let μs = calculateGravitationalParameters system settings
+        let μs = system.Bodies |> Array.map (fun body -> body.GravitationalParameter)
 
         let initialPositions = system.Bodies |> Array.map (fun body -> body.R)
         let mutable A = settings.Accelerator initialPositions μs
