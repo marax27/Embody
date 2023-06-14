@@ -6,15 +6,17 @@ module Domain =
     open LinearAlgebra
 
     /// Data structure that represents a single celestial body.
-    type CelestialBody<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm> = {
+    type CelestialBody<[<Measure>] 'l, [<Measure>] 't> = {
         Name: string
-        Mass: float<'m>
+        GravitationalParameter: float<'l^3/'t^2>
         R: NumericalVector3<'l>
         V: NumericalVector3<'l/'t>
     }
 
     /// Data structure that represents a simulated celestial system, with
     /// all its bodies.
-    type CelestialSystem<[<Measure>] 'l, [<Measure>] 't, [<Measure>] 'm> = {
-        Bodies: CelestialBody<'l, 't, 'm> array
+    type CelestialSystem<[<Measure>] 'l, [<Measure>] 't> = {
+        Bodies: CelestialBody<'l, 't> array
     }
+
+

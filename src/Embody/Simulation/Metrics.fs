@@ -12,8 +12,9 @@ module Metrics =
     /// current TE and initial TE can serve as a metric of simulation's quality.
     /// TE should stay constant in a closed system, and any deviation could be considered an error.
     let calculateTotalEnergy
-        (preset: SimulationPreset<'l, 't, 'm>)
+        (preset: SimulationPreset<'l, 't>)
         (step: IntegratorStep<'l, 't>)
+        G
         : float<'m*'l^2/'t^2>
         =
 
@@ -21,18 +22,17 @@ module Metrics =
         let bodyCount = bodies.Length
         let bodyIndices = [0 .. bodyCount - 1]
 
-        let G = preset.Settings.GravitationalConstant
-        let μs = bodyIndices |> List.map (fun i -> G * bodies.[i].Mass)
+        let μs = bodyIndices |> List.map (fun i -> bodies.[i].GravitationalParameter)
 
         let inline calculateKineticEnergy i =
-            0.5 * bodies.[i].Mass * (step.V.[i] |> Vector3.squaredLength)
+            0.5 * bodies.[i].GravitationalParameter / G * (step.V.[i] |> Vector3.squaredLength)
 
         let inline calculatePotentialEnergy i =
             let partial = bodyIndices
                         |> List.except [ i ]
                         |> List.sumBy (fun j ->
                             let distance = (step.R.[j] - step.R.[i]) |> Vector3.length
-                            bodies.[j].Mass / distance
+                            bodies.[j].GravitationalParameter / G / distance
                         )
             -μs.[i] * partial
 

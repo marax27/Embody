@@ -5,7 +5,7 @@
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
     <Title>Embody</Title>
-    <Version>0.1.2</Version>
+    <Version>0.2.0</Version>
     <Description>F# toolset for creating, executing, and validating n-body simulations</Description>
     <PackageId>Embody</PackageId>
     <Authors>Kacper Tonia</Authors>
