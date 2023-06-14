@@ -35,7 +35,7 @@ module Horizon =
     }
 
     let private _parseVectorTableHeading (lines: string seq) =
-        let bodyNameRegex = new Regex("(?<=Revised.*\\s+)[a-zA-Z]+(?=\\s+/)")
+        let bodyNameRegex = new Regex("(?<=Revised.*\\s+)[a-zA-Z]+(?=\\s+/?)")
         let bodyNameLine = lines |> Seq.skip 1 |> Seq.head
         let bodyName = bodyNameRegex.Match(bodyNameLine).Captures
                         |> Seq.map (fun s -> s.Value)
